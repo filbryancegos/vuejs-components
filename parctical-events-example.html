@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Basic props</title>
+</head>
+<body>
+    <div id="app">
+       <register></register>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+       let CountryDropdown = {
+           data() {
+               return {
+                   country: ''
+               }
+           },
+           template: `
+           <select id="country" @change="change" v-model="country">
+                <option value="">Please choose country</option>
+                <option value="UK">United Kingdom</option>
+                <option value="USA">United States of America</option>
+                <option value="AU">Australia</option>
+            </select>
+           `,
+           methods: {
+            change() {
+                this.$emit('changed', this.country)
+            }
+           }
+       }
+        let Register = {
+            data() {
+                return {
+                    form: {
+                        user: '',
+                        country: ''
+                    }
+                }
+            },
+            components: {
+                'country-dropdown': CountryDropdown
+            },
+            methods: {
+                countryChanged(value) {
+                    this.form.country = value;
+                }
+            },
+            template: `
+                <form action="#">
+                    <div class="form_group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" v-model="form.user">    
+                    </div>
+                    <div class="form_group">
+                        <label for="country">country</label>
+                        <country-dropdown v-on:changed="countryChanged"></country-dropdown>
+                    </div>
+                    {{form}}
+                </form>
+            `,
+        }
+     
+        let app = new Vue({
+            el: '#app',
+            components: {
+                'register': Register
+            },
+            data: {
+
+            }
+        })
+    </script>
+</body>
+</html>
