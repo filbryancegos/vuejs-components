@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Emmiting event from child component</title>
+</head>
+<body>
+    <div id="app">
+        <counter></counter>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        let Increment = {
+            template: `
+                <button @click.prevent="increment">Increment</button>
+            `,
+            methods: {
+                increment() {
+                    this.$emit('bryan')
+                }
+            }
+        }
+        let Counter = {
+            data() {
+                return {
+                    number: 20
+                }
+            },
+            components: {
+                'inc': Increment
+            },
+            template: `
+                <div>
+                {{number}}
+                <inc v-on:bryan="increment"></inc>
+                </div>
+               
+            `,
+            methods:{
+                increment() {
+                    return this.number++
+                }
+            }
+        }
+     
+        let app = new Vue({
+            el: '#app',
+            components: {
+                'counter': Counter
+            },
+            data: {
+
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Components have thier own data</title>
+</head>
+<body>
+    <div id="app">
+        <user></user>
+        <admin></admin>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    
+    <script>
+        Vue.component('user', {
+            data() {
+                return {
+                    name: "Amang Brutos"
+                }
+            },
+            template: `
+                <div class="user">{{name}}</div>
+            `
+        })
+
+        Vue.component('admin', {
+            data() {
+                return {
+                    name: "Fil Bryan Egos Egos"
+                }
+            },
+            template: `
+                <div class="admin">{{name}}</div>
+            `
+        })
+
+        let app = new Vue({
+            el: '#app',
+            data: {
+
+            }
+        })
+    </script>
+</body>
+</html>

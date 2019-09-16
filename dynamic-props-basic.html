@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dynamic props basic</title>
+</head>
+<body>
+    <div id="app">
+       <num :number="{value: 40}"></num>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+
+        let Num = {
+            props: ['number'],
+            template: `
+                <div>{{number.value + 10}}</div>
+            `
+        }
+     
+        let app = new Vue({
+            el: '#app',
+            components: {
+                'num': Num
+            },
+            data: {
+
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Local Component Registration</title>
+</head>
+<body>
+    <div id="app">
+        <post></post>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    
+    <script>
+        let User = {
+            data() {
+                return {
+                    name: 'Fil Bryan Egos'
+                }
+            },
+            template: `
+                <div class="user">
+                    {{name}}
+                </div>
+            `
+        }
+
+        let Post = {
+            data() {
+                return {
+                    title: 'This is title'
+                }
+            },
+            components: {
+                'user': User
+            },
+            template: `
+                <div class="post">
+                    <h1>{{title}}</h1>
+                    <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatem laboriosam non consequatur enim rem deleniti delectus, assumenda quo. Quisquam accusantium optio ex molestias tenetur nulla nesciunt iure possimus voluptates vel.</p>
+                    <user></user>
+                </div>
+            `
+        }
+     
+        let app = new Vue({
+            el: '#app',
+            components: {
+                'post': Post
+            },
+            data: {
+
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Basic props</title>
+</head>
+<body>
+    <div id="app">
+       <message></message>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+
+        let Lowercase = {
+            props: ['message'],
+            template: `
+                <div>{{toLowerCase}}</div>
+            `,
+            computed: {
+                toLowerCase() {
+                    return this.message.toLowerCase();
+                }
+            }
+        }
+
+        let Uppercase = {
+            props: ['message'],
+            template: `
+                <div>{{toUpperCase}}</div>
+            `,
+            computed: {
+                toUpperCase() {
+                    return this.message.toUpperCase();
+                }
+            }
+        }
+
+        let Message = {
+            data() {
+                return {
+                    message: ''
+                }
+            },
+            components: {
+                lowercase: Lowercase,
+                uppercase: Uppercase
+            },
+            template: `
+                <div>
+                    <input type="text" v-model="message">
+                    <lowercase :message="message"></lowercase>
+                    <uppercase :message="message"></uppercase>
+                </div>
+            `
+        }
+     
+        let app = new Vue({
+            el: '#app',
+            components: {
+                'message': Message
+            },
+            data: {
+
+            }
+        })
+    </script>
+</body>
+</html>

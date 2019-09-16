@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Basic props</title>
+</head>
+<body>
+    <div id="app">
+        <number></number>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+
+        let Numbers = {
+            props: {
+                number: {
+                    type: Array,
+                    default() {
+                        return [121,4343,5454,6676,12,32,45,65,75]
+                    }
+                }
+            },
+            template: `
+                <div>{{addNum}}</div>
+            `,
+            computed: {
+                addNum() {
+                    return this.number.reduce((a, b) => a + b,0 )
+                }
+            }
+        }
+     
+        let app = new Vue({
+            el: '#app',
+            components: {
+                'number': Numbers
+            },
+            data: {
+
+            }
+        })
+    </script>
+</body>
+</html>
