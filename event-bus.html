@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Basic props</title>
+</head>
+<body>
+    <div id="app">
+        <increment></increment>
+        <one></one>
+        <two></two>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+
+    let bus = new Vue();
+       
+
+    let One = {
+        data() {
+            return {
+                number: 0
+            }
+        },
+        template: `
+            <span>{{number}}</span>
+        `,
+        mounted() {
+            bus.$on('increment', () => {
+                this.number++;
+            })
+        }
+    }
+    let Two = {
+        data() {
+            return {
+                number: 2
+            }
+        },
+        template: `
+            <span>{{number}}</span>
+        `,
+        mounted() {
+            bus.$on('increment', () => {
+                this.number = this.number * 2;
+            })
+        }
+    }
+
+    let Increment = {
+        template: `
+            <button @click.prevent="increment">Increment</button>
+        `,
+        methods: {
+            increment() {
+                bus.$emit('increment')
+            }
+        }
+    }
+     
+    let app = new Vue({
+        el: '#app',
+        components: {
+            'increment': Increment,
+            'one': One,
+            'two': Two
+        },
+        data: {
+
+        }
+    })
+    </script>
+</body>
+</html>
